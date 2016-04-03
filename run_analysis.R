@@ -1,5 +1,3 @@
-setwd("C:\\Users\\Jesus\\Google Drive\\Coursera\\Data Science\\Course 3 - Getting and Cleaning Data\\Programming assignment")
-  
 library(plyr)
 library(dplyr)
 
@@ -40,8 +38,10 @@ levels(workingdf$activityID) <- activityLabels[,2] #associate new levels #3.
 workingdf
 }
 
-#copy
 avgData <- createTidyData()
 #want to compute the average of each measurement for each activity and subject
 #group data by activity and subject then perform mean funcion on all columns (grouped columns will contain only one result)
 avgData <- avgData %>% group_by(subjectID, activityID) %>% summarise_each(funs(mean))
+
+#export table
+write.table(avgData, file = "averages.txt", row.name = FALSE)
